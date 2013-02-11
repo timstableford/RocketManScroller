@@ -13,8 +13,8 @@ import java.util.LinkedList;
  * @author bpt
  */
 public abstract class TwoPlayerTurnGame extends GamePanel {
-
-    LinkedList<GameState> stack = new LinkedList<GameState>();
+	private static final long serialVersionUID = 1L;
+	LinkedList<GameState> stack = new LinkedList<GameState>();
      GameAI opponent;
      GameState currentState;
 

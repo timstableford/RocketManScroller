@@ -14,7 +14,8 @@ import java.util.ArrayList;
  * @author bpt
  */
 public class ActionGamePanel extends GamePanel {
-    ArrayList<CollidableSprite> sprites = new ArrayList<CollidableSprite>();
+	private static final long serialVersionUID = 1L;
+	ArrayList<CollidableSprite> sprites = new ArrayList<CollidableSprite>();
 
     /** Constructor
      *

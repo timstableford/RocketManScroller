@@ -10,17 +10,17 @@ package gameengine2d.collisions;
  * @author bpt
  */
 public class CollidableAABB implements Collidable {
-        /** The x coord of the AABB */
+	/** The x coord of the AABB */
 	public double x;
-         /** The y coord of the AABB */
+	/** The y coord of the AABB */
 	public double y;
-         /** The width of the AABB */
+	/** The width of the AABB */
 	public double w;
-         /** The height of the AABB */
+	/** The height of the AABB */
 	public double h;
-       
-        @Override
-        public boolean isColliding(Collidable c) {
+
+	@Override
+	public boolean isColliding(Collidable c) {
 		if (c instanceof CollidableCircle) {
 			// No need to repeat ourselves
 			return c.isColliding(this);
@@ -32,19 +32,19 @@ public class CollidableAABB implements Collidable {
 			if (aabb.y>y+h) return false;
 			return true;
 		}  else if (c instanceof InsideCollidableAABB) {
-                    return c.isColliding(this);
-                }
-                return false;
+			return c.isColliding(this);
+		}
+		return false;
 
 	}
 
-    @Override
-        public String toString() {
-            return "x = " + x + ", y = " + y + ", w = " + w + ", h = " + h;
-        }
+	@Override
+	public String toString() {
+		return "x = " + x + ", y = " + y + ", w = " + w + ", h = " + h;
+	}
 
-    public void setLocation(double x, double y) {
-        this.x=x; this.y=y;
-    }
+	public void setLocation(double x, double y) {
+		this.x=x; this.y=y;
+	}
 
 }

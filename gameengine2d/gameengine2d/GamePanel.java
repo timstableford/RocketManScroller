@@ -12,7 +12,8 @@ import javax.swing.JPanel;
  * @author bpt
  */
 public abstract class GamePanel extends JPanel implements Runnable {
-    private int pause=1;
+	private static final long serialVersionUID = 1L;
+	private int pause=1;
     private boolean running = false;
 
     /** No args constructor, frame pause is set to 1
