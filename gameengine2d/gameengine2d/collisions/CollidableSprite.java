@@ -56,6 +56,15 @@ public class CollidableSprite extends SpriteBitmapArray {
 		this.bounds = bounds;
 		this.x = x; this.y = y;
 	}
+	public CollidableSprite(int x, int y, Image img, Component comp, float scale) {
+		super(x,y,new Image[]{img}, comp, scale);
+		CollidableAABB bounds = new CollidableAABB();
+		bounds.x = x; bounds.y = y;
+		bounds.w = getWidth();
+		bounds.h = getHeight();
+		this.bounds = bounds;
+		this.x = x; this.y = y;
+	}
 	/**
 	 * Add a sprite listening for collisions with this
 	 * @param listener the listener to add
