@@ -44,6 +44,20 @@ public class World implements Item{
 			dx = -(int)focus.getX()+width_pixels/2;
 			dy = -(int)focus.getY()+height_pixels/2;
 		}
+		//make sure window never goes too low
+		if(dy<focus.getHeight()/2-TER_SIZE*2){
+			dy = focus.getHeight()/2-TER_SIZE*2;
+		}
+		//make sure not too far left
+		if(dx>0){
+			dx = 0;
+		}
+		//make sure not too far right
+		//TODO this is off by a few pixels
+		if(dx<-(desired_width_pixels-width_pixels+focus.getWidth()/2)){
+			dx = -(desired_width_pixels-width_pixels+focus.getWidth()/2);
+		}
+		System.out.println(focus.getPos());
 		g.fillRect(0,0,desired_width_pixels,height_pixels);
 		g.translate(dx, dy);
 		g.drawImage(terrain.getTerrain(textures.get("top"), textures.get("ground")),0,0,null);
