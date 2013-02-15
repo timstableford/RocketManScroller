@@ -22,9 +22,9 @@ public class Launch extends JFrame{
 	public Launch(){
 		this.setSize(800,600);
 		this.textures = this.loadTextures();
-		scroller = new SideScrollerPanel(30);
-		player = new Player(new Vector2D(3000,100), textures.get("rocketman"), textures.get("rocketfire"), 0.2f);
-		World w = new World(6000, this.getHeight(), this.textures);
+		scroller = new SideScrollerPanel(60);
+		player = new Player(new Vector2D(3000,-350), textures.get("rocketman"), textures.get("rocketfire"), 0.2f);
+		World w = new World(6000, this.getWidth(), this.getHeight(), this.textures);
 		w.setFocus(player);
 		scroller.addItem(w);
 		this.addKeyListener(player);
@@ -35,11 +35,13 @@ public class Launch extends JFrame{
 		this.setVisible(true);
 	}
 	private HashMap<String, Texture> loadTextures(){
+		System.out.println("Loading textures");
 		HashMap<String, Texture> t = new HashMap<String, Texture>();
 		t.put("ground", new Texture("/tile_ground.png"));
 		t.put("top", new Texture("/grasstile.png"));
 		t.put("rocketman", new Texture("/rocketman.png"));
 		t.put("rocketfire", new Texture("/rocketmanfire.png"));
+		System.out.println("Texture loaded");
 		return t;
 	}
 

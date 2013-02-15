@@ -45,8 +45,12 @@ public class SideScrollerPanel extends JPanel implements Runnable{
 			lastTick = System.currentTimeMillis();
 			this.updateItems(dT);
 			this.repaint();
+			long wait = (long) (2*fpsinv-dT);
+			if(wait<0){
+				wait = 0;
+			}
 			try {
-				Thread.sleep((long) (fpsinv));
+				Thread.sleep(wait);
 			} catch (InterruptedException e) {
 				//insomniac thread
 			}
