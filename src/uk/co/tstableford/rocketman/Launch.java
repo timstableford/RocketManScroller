@@ -1,76 +1,45 @@
 package uk.co.tstableford.rocketman;
 
 import java.awt.BorderLayout;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
+import java.util.HashMap;
 
-import gameengine2d.ActionGamePanel;
-import gameengine2d.collisions.CollidableSprite;
-
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-public class Launch extends JFrame implements KeyListener{
+import uk.co.tstableford.sidescroller.Player;
+import uk.co.tstableford.sidescroller.SideScrollerPanel;
+import uk.co.tstableford.sidescroller.Texture;
+import uk.co.tstableford.sidescroller.Vector2D;
+import uk.co.tstableford.sidescroller.World;
+
+public class Launch extends JFrame{
 	private static final long serialVersionUID = 1L;
-	private CollidableSprite rocketMan;
-	public Launch(String[] args){
-		this.setSize(800,800);
+	private SideScrollerPanel scroller;
+	private Player player;
+	private HashMap<String, Texture> textures;
+	public static void main(String[] args){
+		new Launch();
+	}
+	public Launch(){
+		this.setSize(800,600);
+		this.textures = this.loadTextures();
+		scroller = new SideScrollerPanel(30);
+		World w = new World(1000, this.getHeight(), this.textures);
+		scroller.addItem(w);
+		player = new Player(new Vector2D(100,100), textures.get("rocketman"), textures.get("rocketfire"), 0.2f);
+		this.addKeyListener(player);
+		w.addSprite(player);
+		
+		this.add(scroller, BorderLayout.CENTER);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.addKeyListener(this);
-		ActionGamePanel agp = new ActionGamePanel(10);
-		agp.play();
-		rocketMan = getRocketMan();
-		agp.addSprite(rocketMan);
-
-
-		this.getContentPane().add(agp, BorderLayout.CENTER);
 		this.setVisible(true);
 	}
-	private CollidableSprite getRocketMan(){
-		CollidableSprite s = new CollidableSprite(100, 100, loadImage("/rocketman.png"), this, 0.5f);
-		return s;
+	private HashMap<String, Texture> loadTextures(){
+		HashMap<String, Texture> t = new HashMap<String, Texture>();
+		t.put("ground", new Texture("/tile_ground.png"));
+		t.put("top", new Texture("/grasstile.png"));
+		t.put("rocketman", new Texture("/rocketman.png"));
+		t.put("rocketfire", new Texture("/rocketmanfire.png"));
+		return t;
 	}
-	private BufferedImage loadImage(String path){
-		try {
-			return ImageIO.read(this.getClass().getResourceAsStream(path));
-		} catch (IOException e) {
-			return null;
-		}
-	}
-	public static void main(String[] args) {
-		new Launch(args);
-	}
-	@Override
-	public void keyPressed(KeyEvent e) {
-		double vx,vy;
-		vx = rocketMan.getVx();
-		vy = rocketMan.getVy();
-		switch(e.getKeyCode()){
-			case KeyEvent.VK_UP: vy = -1; break;
-			case KeyEvent.VK_DOWN: vy = 1; break;
-			case KeyEvent.VK_LEFT: vx = -1; break;
-			case KeyEvent.VK_RIGHT: vx = 1; break;
-			default: break;
-		}
-		rocketMan.setVelocity(vx, vy);
-	}
-	@Override
-	public void keyReleased(KeyEvent e) {
-		double vx,vy;
-		vx = rocketMan.getVx();
-		vy = rocketMan.getVy();
-		switch(e.getKeyCode()){
-			case KeyEvent.VK_UP: vy = 0; break;
-			case KeyEvent.VK_DOWN: vy = 0; break;
-			case KeyEvent.VK_LEFT: vx = 0; break;
-			case KeyEvent.VK_RIGHT: vx = 0; break;
-			default: break;
-		}
-		rocketMan.setVelocity(vx, vy);
-	}
-	@Override
-	public void keyTyped(KeyEvent e) {}
 
 }
