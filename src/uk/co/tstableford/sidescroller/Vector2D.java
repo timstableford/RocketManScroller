@@ -21,7 +21,13 @@ public class Vector2D {
             float dot = (this.x*other.x + this.y*other.y);
             return dot;
     }
-
+    public Vector2D unit(){
+    	Vector2D r = new Vector2D();
+    	float mag = this.getMagnitude();
+    	r.x = this.x/mag;
+    	r.y = this.y/mag;
+    	return r;
+    }
     public float perpDot(Vector2D other) {
             float pdot =  this.x*other.y-this.y*other.x;
             return pdot;

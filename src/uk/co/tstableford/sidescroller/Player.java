@@ -23,7 +23,7 @@ public class Player extends CollidableMassSprite implements KeyListener{
 		this.pressed = new HashMap<Character, Boolean>();
 		this.setVisible(true);
 		this.setActive(true);
-		this.setGravity(true);
+		this.setGravity(new Vector2D(0, 20));
 	}
 	public void setRotation(float rotation){
 		this.rotation = rotation;
@@ -31,17 +31,20 @@ public class Player extends CollidableMassSprite implements KeyListener{
 	@Override
 	public void paint(Graphics g) {
 		Texture texture = normal;
+		float r = (float) (rotation-Math.PI/2);
+		float rx = (float) (velocity.unit().getX()*Math.PI/2);
+		r = r + rx;
 		if(isPressed('w')||isPressed('a')||isPressed('d')){
 			texture = fire;
 		}
 		Graphics2D g2 = (Graphics2D)g;
-		g2.rotate(rotation-Math.PI/2, pos.getX(), pos.getY());
+		g2.rotate(r, pos.getX(), pos.getY());
 		g2.drawImage(texture.get(), 
 				(int)(pos.getX()-this.width/2), 
 				(int)(pos.getY()-this.height/2), 
 				this.width, 
 				this.height, null);
-		g2.rotate(-(rotation-Math.PI/2), pos.getX(), pos.getY());
+		g2.rotate(-r, pos.getX(), pos.getY());
 	}
 	@Override
 	public void update(long dT){
@@ -68,16 +71,13 @@ public class Player extends CollidableMassSprite implements KeyListener{
 	@Override
 	public void keyPressed(KeyEvent arg0) {
 		switch(arg0.getKeyCode()){
-		case 'w': case KeyEvent.VK_UP:
+		case KeyEvent.VK_W: case KeyEvent.VK_UP:
 			this.setPressed('w', true);
 			break;
-		case 'a': case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_A: case KeyEvent.VK_LEFT:
 			this.setPressed('a', true);
 			break;
-		case 's': case KeyEvent.VK_DOWN:
-			this.setPressed('s', true);
-			break;
-		case 'd': case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_D: case KeyEvent.VK_RIGHT:
 			this.setPressed('d', true);
 			break;
 		default: break;
@@ -86,16 +86,13 @@ public class Player extends CollidableMassSprite implements KeyListener{
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		switch(arg0.getKeyCode()){
-		case 'w': case KeyEvent.VK_UP:
+		case KeyEvent.VK_W: case KeyEvent.VK_UP:
 			this.setPressed('w', false);
 			break;
-		case 'a': case KeyEvent.VK_LEFT:
+		case KeyEvent.VK_A: case KeyEvent.VK_LEFT:
 			this.setPressed('a', false);
 			break;
-		case 's': case KeyEvent.VK_DOWN:
-			this.setPressed('s', false);
-			break;
-		case 'd': case KeyEvent.VK_RIGHT:
+		case KeyEvent.VK_D: case KeyEvent.VK_RIGHT:
 			this.setPressed('d', false);
 			break;
 		default: break;

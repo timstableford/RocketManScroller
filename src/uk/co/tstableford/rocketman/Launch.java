@@ -23,9 +23,10 @@ public class Launch extends JFrame{
 		this.setSize(800,600);
 		this.textures = this.loadTextures();
 		scroller = new SideScrollerPanel(30);
-		World w = new World(1000, this.getHeight(), this.textures);
+		player = new Player(new Vector2D(3000,100), textures.get("rocketman"), textures.get("rocketfire"), 0.2f);
+		World w = new World(6000, this.getHeight(), this.textures);
+		w.setFocus(player);
 		scroller.addItem(w);
-		player = new Player(new Vector2D(100,100), textures.get("rocketman"), textures.get("rocketfire"), 0.2f);
 		this.addKeyListener(player);
 		w.addSprite(player);
 		

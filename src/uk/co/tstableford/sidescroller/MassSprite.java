@@ -1,18 +1,17 @@
 package uk.co.tstableford.sidescroller;
 
 public abstract class MassSprite extends Sprite{
-	public static final Vector2D g = new Vector2D(0f, (float) (2*9.8));
 	protected Vector2D velocity, acceleration;
 	protected float mass;
-	private boolean gravity;
+	private Vector2D gravity;
 	public MassSprite(Vector2D pos, Vector2D acceleration, Vector2D velocity, float mass){
 		super(pos);
 		this.acceleration = acceleration;
 		this.velocity = velocity;
 		this.mass = mass;
-		this.gravity = false;
+		this.gravity = null;
 	}
-	public void setGravity(boolean g){
+	public void setGravity(Vector2D g){
 		this.gravity = g;
 	}
 	public Vector2D getVelocity(){
@@ -34,13 +33,14 @@ public abstract class MassSprite extends Sprite{
 	@Override
 	public void update(long dT) {
 		//if gravity apply it
-		if(this.gravity){
-			applyAcceleration(g);
-		}
-		
+		if(this.gravity!=null){
+			applyAcceleration(this.gravity);
+		}	
 		//update velocity
 		//v = u + at
 		this.velocity = this.velocity.add(this.acceleration.scale(dT/1000f));
+		//friction
+		this.velocity = this.velocity.scale(0.995f);
 		//update position
 		//ds = v*t
 		this.pos = this.pos.add(this.velocity.scale(dT/1000f));
