@@ -4,7 +4,9 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-public class Terrain {
+import uk.co.tstableford.sidescroller.collisions.Collidable;
+
+public class Terrain{
 	private Random rand;
 	private int[] terrain;
 	private int ter_size_pixels;
@@ -51,7 +53,7 @@ public class Terrain {
 				if(y==h){
 					t = top;
 				}
-				Square s = new Square(x*ter_size_pixels, y*ter_size_pixels, ter_size_pixels, ter_size_pixels, t, Math.PI);
+				TerrainSquare s = new TerrainSquare(x*ter_size_pixels, y*ter_size_pixels, ter_size_pixels, ter_size_pixels, t, Math.PI);
 				s.paint(g);
 			}
 		}

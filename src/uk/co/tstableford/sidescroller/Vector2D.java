@@ -17,6 +17,9 @@ public class Vector2D {
             this.setX(x);
             this.setY(y);
     }
+    public Vector2D normal(){
+    	return new Vector2D(-this.y, this.x);
+    }
     public float dot(Vector2D other) {
             float dot = (this.x*other.x + this.y*other.y);
             return dot;

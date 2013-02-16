@@ -2,11 +2,11 @@ package uk.co.tstableford.sidescroller;
 
 import java.awt.Graphics2D;
 
-public class Square {
+public class TerrainSquare {
 	int x,y,w,h;
 	private Texture t;
 	private double rotation;
-	public Square(int x, int y, int w, int h, Texture texture, double rotation){
+	public TerrainSquare(int x, int y, int w, int h, Texture texture, double rotation){
 		this.x = x; this.y = y; this.w = w; this.h = h;
 		this.t = texture;
 		this.rotation = rotation;

@@ -5,16 +5,17 @@
 
 package uk.co.tstableford.sidescroller.collisions;
 
+import uk.co.tstableford.sidescroller.Vector2D;
+import uk.co.tstableford.sidescroller.collisions.bounds.BoundsType;
+
 /**
  * Interface for collidable objects
  * @author bpt
  */
 public interface Collidable {
-    /** Check if this collidable is colliding with another collidable object
-     *
-     * @param c the object to check for collisions with
-     * @return returns true if the objects are colliding
-     */
-    boolean isColliding(Collidable c);
-    void setLocation(double x, double y);
+    public Vector2D isColliding(Collidable c);
+    public Vector2D getPos();
+    public void setPos(Vector2D p);
+    public Object getOwner();
+    public BoundsType getType();
 }
