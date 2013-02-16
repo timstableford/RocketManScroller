@@ -4,8 +4,6 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
-import uk.co.tstableford.sidescroller.collisions.Collidable;
-
 public class Terrain{
 	private Random rand;
 	private int[] terrain;

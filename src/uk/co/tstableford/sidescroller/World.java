@@ -57,7 +57,6 @@ public class World implements Item{
 		if(dx<-(desired_width_pixels-width_pixels+focus.getWidth()/2)){
 			dx = -(desired_width_pixels-width_pixels+focus.getWidth()/2);
 		}
-		System.out.println(focus.getPos());
 		g.fillRect(0,0,desired_width_pixels,height_pixels);
 		g.translate(dx, dy);
 		g.drawImage(terrain.getTerrain(textures.get("top"), textures.get("ground")),0,0,null);
